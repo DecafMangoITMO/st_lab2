@@ -4,21 +4,18 @@ import function.Function;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class CosFunction implements Function {
+public class CotFunction implements Function {
 
     private final Function sin;
+    private final Function cos;
 
     @Override
     public double calculate(double x, double epsilon) {
         double normalizedX = (x % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
 
-        double sinX = sin.calculate(normalizedX, epsilon);
-        double cosX = Math.sqrt(Math.abs(1 - sinX * sinX));
+        if (normalizedX == 0 || normalizedX == Math.PI)
+            throw new ArithmeticException("cot is not defined for 0 and PI");
 
-        if (normalizedX > Math.PI / 2 && normalizedX < Math.PI * 3 / 2) {
-            cosX = -cosX;
-        }
-
-        return cosX;
+        return cos.calculate(normalizedX, epsilon) / sin.calculate(normalizedX, epsilon);
     }
 }

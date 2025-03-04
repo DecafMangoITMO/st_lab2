@@ -4,21 +4,18 @@ import function.Function;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class CosFunction implements Function {
+public class TanFunction implements Function {
 
     private final Function sin;
+    private final Function cos;
 
     @Override
     public double calculate(double x, double epsilon) {
         double normalizedX = (x % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
 
-        double sinX = sin.calculate(normalizedX, epsilon);
-        double cosX = Math.sqrt(Math.abs(1 - sinX * sinX));
+        if (normalizedX == Math.PI / 2 || normalizedX == Math.PI * 3 / 2)
+            throw new ArithmeticException("tan is not defined for PI/2 and 3*PI/2");
 
-        if (normalizedX > Math.PI / 2 && normalizedX < Math.PI * 3 / 2) {
-            cosX = -cosX;
-        }
-
-        return cosX;
+        return sin.calculate(x, epsilon) / cos.calculate(x, epsilon);
     }
 }
