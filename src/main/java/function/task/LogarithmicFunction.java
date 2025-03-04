@@ -2,16 +2,18 @@ package function.task;
 
 import function.Function;
 import function.impl.*;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class LogarithmicFunction implements Function {
+
+    private final Function ln;
+    private final Function log_2;
+    private final Function log_3;
+    private final Function log_10;
 
     @Override
     public double calculate(double x, double epsilon) {
-        Function ln = new LogEFunction();
-        Function log_2 = new Log2Function(ln);
-        Function log_3 = new Log3Function(ln);
-        Function log_10 = new Log10Function(ln);
-
         if ((x <= 0) || (x == 1)) {
             throw new ArithmeticException("x must be greater than 0 and not equal to 1");
         }
