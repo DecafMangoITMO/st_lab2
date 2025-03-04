@@ -12,7 +12,7 @@ public class TotalFunction implements Function {
     @Override
     public double calculate(double x, double epsilon) {
         if (epsilon <= 0)
-            throw new ArithmeticException("epsilon must be positive");
+            throw new IllegalArgumentException("epsilon must be positive");
 
         if (x <= 0)
             return trigFunction.calculate(x, epsilon);

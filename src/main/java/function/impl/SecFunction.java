@@ -10,6 +10,9 @@ public class SecFunction implements Function {
 
     @Override
     public double calculate(double x, double epsilon) {
+        if (epsilon <= 0d)
+            throw new IllegalArgumentException("epsilon must be positive");
+
         double normalizedX = (x % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
 
         if (normalizedX == Math.PI / 2 || normalizedX == 3 * Math.PI / 2)

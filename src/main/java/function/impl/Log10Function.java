@@ -12,6 +12,9 @@ public class Log10Function implements Function {
 
     @Override
     public double calculate(double x, double epsilon) {
+        if (epsilon <= 0d)
+            throw new IllegalArgumentException("epsilon must be positive");
+
         if (x <= 0) {
             throw new ArithmeticException("y must be greater than 0");
         }

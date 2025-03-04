@@ -6,6 +6,9 @@ public class LogEFunction implements Function {
 
     @Override
     public double calculate(double y, double epsilon) {
+        if (epsilon <= 0d)
+            throw new IllegalArgumentException("epsilon must be positive");
+
         if (y <= 0) {
             throw new ArithmeticException("x must be greater than 0");
         }

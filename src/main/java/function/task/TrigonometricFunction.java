@@ -16,6 +16,9 @@ public class TrigonometricFunction implements Function {
 
     @Override
     public double calculate(double x, double epsilon) {
+        if (epsilon <= 0d)
+            throw new IllegalArgumentException("epsilon must be positive");
+
         return (((((tan.calculate(x, epsilon) / sec.calculate(x, epsilon)) * cot.calculate(x, epsilon)) - sec.calculate(x, epsilon)) - csc.calculate(x, epsilon)) * ((csc.calculate(x, epsilon) + sin.calculate(x, epsilon)) / sec.calculate(x, epsilon)));
     }
 
