@@ -13,10 +13,6 @@ public class CosFunction implements Function {
         if (epsilon <= 0d)
             throw new IllegalArgumentException("epsilon must be positive");
 
-        if (Double.isNaN(x) || Double.isInfinite(x)) {
-            throw new IllegalArgumentException("no NaN or Infinity here!");
-        }
-
         double normalizedX = (x % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
 
         double sinX = sin.calculate(normalizedX, epsilon);
