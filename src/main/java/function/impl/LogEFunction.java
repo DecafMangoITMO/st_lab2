@@ -9,6 +9,10 @@ public class LogEFunction implements Function {
         if (epsilon <= 0d)
             throw new IllegalArgumentException("epsilon must be positive");
 
+        if (Double.isNaN(y) || Double.isInfinite(y)) {
+            throw new IllegalArgumentException("no NaN or Infinity here!");
+        }
+
         if (y <= 0) {
             throw new ArithmeticException("x must be greater than 0");
         }

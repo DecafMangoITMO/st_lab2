@@ -108,7 +108,7 @@ public class TotalFunctionUnitTest {
             -Math.PI / 2,
             0
     })
-    public void testSpecialNonPositivePoints(double x) {
+    public void testSpecialNonPositiveXPoints(double x) {
         Assertions.assertThrows(ArithmeticException.class, () -> { totalFunction.calculate(x, EPSILON);});
     }
 
@@ -119,10 +119,65 @@ public class TotalFunctionUnitTest {
             -2.626d,
             -1.34d
     })
-    public void testPeriodNonPositivePoints(double x) {
+    public void testPeriodNonPositiveXPoints(double x) {
         double yCalculated1 = totalFunction.calculate(x, EPSILON);
         double yCalculated2 = totalFunction.calculate(x - 2 * Math.PI, EPSILON);
 
         Assertions.assertEquals(yCalculated1, yCalculated2, DELTA);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "0.7051:1.47687",
+            "0.7222:0.89819",
+            "0.807:0.04841"
+    }, delimiter = ':')
+    public void testFirstIntervalPositiveX(double x, double yExpected) {
+        double yCalculated = totalFunction.calculate(x, EPSILON);
+
+        Assertions.assertEquals(yExpected, yCalculated, DELTA);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "0.9313:0.00002",
+            "0.992:0d",
+            "1.107:-0.00026"
+    }, delimiter = ':')
+    public void testSecondIntervalPositiveX(double x, double yExpected) {
+        double yCalculated = totalFunction.calculate(x, EPSILON);
+
+        Assertions.assertEquals(yExpected, yCalculated, DELTA);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "1.237:-0.04573",
+            "1.3612:-0.61577",
+            "1.4137:-1.38461"
+    }, delimiter = ':')
+    public void testThirdIntervalPositiveX(double x, double yExpected) {
+        double yCalculated = totalFunction.calculate(x, EPSILON);
+
+        Assertions.assertEquals(yExpected, yCalculated, DELTA);
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {
+            0,
+            1
+    })
+    public void testSpecialPositiveXPoints(double x) {
+        Assertions.assertThrows(ArithmeticException.class, () -> { totalFunction.calculate(x, EPSILON);});
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {
+            Double.NEGATIVE_INFINITY,
+            Double.POSITIVE_INFINITY,
+            Double.NaN
+    })
+    public void testIllegalXPoints(double x) {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> { totalFunction.calculate(x, EPSILON);});
     }
 }
