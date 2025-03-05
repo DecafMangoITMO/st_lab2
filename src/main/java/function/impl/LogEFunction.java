@@ -6,9 +6,6 @@ public class LogEFunction implements Function {
 
     @Override
     public double calculate(double y, double epsilon) {
-        if (epsilon <= 0d)
-            throw new IllegalArgumentException("epsilon must be positive");
-
         if (Double.isNaN(y) || Double.isInfinite(y)) {
             throw new IllegalArgumentException("no NaN or Infinity here!");
         }
@@ -16,6 +13,9 @@ public class LogEFunction implements Function {
         if (y <= 0) {
             throw new ArithmeticException("x must be greater than 0");
         }
+
+        if (epsilon <= 0d)
+            throw new IllegalArgumentException("epsilon must be positive");
 
         int k = 0;
         while (y >= 2) {

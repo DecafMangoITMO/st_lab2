@@ -10,6 +10,9 @@ public class CosFunction implements Function {
 
     @Override
     public double calculate(double x, double epsilon) {
+        if (Double.isNaN(x) || Double.isInfinite(x))
+            throw new IllegalArgumentException("no NaN or Infinity here!");
+
         if (epsilon <= 0d)
             throw new IllegalArgumentException("epsilon must be positive");
 
